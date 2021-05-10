@@ -90,7 +90,7 @@ const Container: React.FC<ContainerProps> = props => {
   const [isDialogOpen, toggleDialog] = React.useState(
     false || (props.workspaceAddedNewDestinations && props.defaultDestinationBehavior === 'ask')
   )
-  const [showBanner, toggleBanner] = React.useState(false)
+  const [showBanner, toggleBanner] = React.useState(true)
   const [isCancelling, toggleCancel] = React.useState(false)
 
   let banner = React.useRef<HTMLElement>(null)
@@ -220,10 +220,6 @@ const Container: React.FC<ContainerProps> = props => {
     toggleDialog(false)
     props.resetPreferences()
   }
-
-  React.useEffect(() => {
-    onAccept()
-  }, [])
 
   return (
     <div className="consent-manager-container">
