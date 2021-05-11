@@ -295,8 +295,12 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
 
       const newDestinations = getNewDestinations(destinations, destinationPreferences)
 
+      // Additional check so that we also save first time preferences
+      const preferenceCookie = loadPreferences()
+      const hasPreferenceCookie = preferenceCookie && Object.keys(preferenceCookie).length > 0
+
       // If preferences haven't changed, don't reload the page as it's a disruptive experience for end-users
-      if (prevState.havePreferencesChanged || newDestinations.length > 0) {
+      if (prevState.havePreferencesChanged || newDestinations.length > 0 || !hasPreferenceCookie) {
         savePreferences({ destinationPreferences, customPreferences, cookieDomain })
         conditionallyLoadAnalytics({
           writeKey,
