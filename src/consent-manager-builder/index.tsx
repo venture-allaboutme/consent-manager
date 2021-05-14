@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import mixpanel from 'mixpanel-browser'
 import { loadPreferences, savePreferences } from './preferences'
 import fetchDestinations from './fetch-destinations'
 import conditionallyLoadAnalytics from './analytics'
@@ -171,6 +172,10 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
   }
 
   initialise = async () => {
+    const mixpanelTracking = process.env.MIXPANEL_TRACKING
+    if (mixpanelTracking) {
+      mixpanel.track('banner_viewed')
+    }
     const {
       writeKey,
       otherWriteKeys = ConsentManagerBuilder.defaultProps.otherWriteKeys,
