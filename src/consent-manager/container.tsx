@@ -175,7 +175,7 @@ const Container: React.FC<ContainerProps> = props => {
   const mixpanelTracking = process.env.MIXPANEL_TRACKING
 
   const onAccept = () => {
-    if (mixpanelTracking) {
+    if (mixpanelTracking === 'true') {
       mixpanel.track('banner_accept_clicked')
     }
     const truePreferences = Object.keys(props.preferences).reduce((acc, category) => {
@@ -196,7 +196,7 @@ const Container: React.FC<ContainerProps> = props => {
   }
 
   const onChangePreferences = () => {
-    if (mixpanelTracking) {
+    if (mixpanelTracking === 'true') {
       mixpanel.track('banner_settings_clicked')
     }
     toggleDialog(true)
@@ -209,7 +209,7 @@ const Container: React.FC<ContainerProps> = props => {
   }
 
   const handleSave = () => {
-    if (mixpanelTracking) {
+    if (mixpanelTracking === 'true') {
       mixpanel.track('banner_settings_saved_clicked')
     }
     toggleDialog(false)

@@ -173,7 +173,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
 
   initialise = async () => {
     const mixpanelTracking = process.env.MIXPANEL_TRACKING
-    if (mixpanelTracking) {
+    if (mixpanelTracking === 'true') {
       mixpanel.track('banner_viewed')
     }
     const {
