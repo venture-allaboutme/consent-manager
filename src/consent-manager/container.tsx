@@ -1,6 +1,7 @@
 import EventEmitter from 'events'
 import React from 'react'
 import styled from 'react-emotion'
+import mixpanel from 'mixpanel-browser'
 import Banner from './banner'
 import PreferenceDialog from './preference-dialog'
 import CancelDialog from './cancel-dialog'
@@ -171,7 +172,12 @@ const Container: React.FC<ContainerProps> = props => {
     return toggleBanner(false)
   }
 
+  const mixpanelTracking = process.env.MIXPANEL_TRACKING
+
   const onAccept = () => {
+    if (mixpanelTracking === 'true') {
+      mixpanel.track('banner_accept_clicked')
+    }
     const truePreferences = Object.keys(props.preferences).reduce((acc, category) => {
       acc[category] = true
       return acc
@@ -189,6 +195,13 @@ const Container: React.FC<ContainerProps> = props => {
     return props.saveConsent()
   }
 
+  const onChangePreferences = () => {
+    if (mixpanelTracking === 'true') {
+      mixpanel.track('banner_settings_clicked')
+    }
+    toggleDialog(true)
+  }
+
   const handleCategoryChange = (category: string, value: boolean) => {
     props.setPreferences({
       [category]: value
@@ -196,6 +209,9 @@ const Container: React.FC<ContainerProps> = props => {
   }
 
   const handleSave = () => {
+    if (mixpanelTracking === 'true') {
+      mixpanel.track('banner_settings_saved_clicked')
+    }
     toggleDialog(false)
 
     props.saveConsent()
@@ -231,7 +247,7 @@ const Container: React.FC<ContainerProps> = props => {
             onClose={onClose}
             onAccept={onAccept}
             onReject={onReject}
-            onChangePreferences={() => toggleDialog(true)}
+            onChangePreferences={onChangePreferences}
             content={props.bannerContent}
             acceptContent={props.bannerAcceptContent}
             rejectContent={props.bannerRejectContent}
