@@ -1,6 +1,6 @@
 {
   "name": "@venture-allaboutme/consent-manager",
-  "version": "5.4.14",
+  "version": "5.4.15",
   "description": "Drop-in consent management plugin for analytics.js",
   "keywords": [
     "gdpr",
