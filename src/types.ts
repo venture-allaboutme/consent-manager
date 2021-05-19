@@ -97,4 +97,6 @@ export interface ConsentManagerProps {
   customCategories?: CustomCategories
   defaultDestinationBehavior?: DefaultDestinationBehavior
   cdnHost?: string
+  mixpanelToken?: string
+  mixpanelTracking?: boolean
 }

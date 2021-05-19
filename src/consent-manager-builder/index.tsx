@@ -78,6 +78,11 @@ interface Props {
    * CDN to fetch list of integrations from
    */
   cdnHost?: string
+
+  /**
+   * Flag if mixpanel events should be sent
+   */
+  mixpanelTracking?: boolean
 }
 
 interface RenderProps {
@@ -172,8 +177,7 @@ export default class ConsentManagerBuilder extends Component<Props, State> {
   }
 
   initialise = async () => {
-    const mixpanelTracking = process.env.MIXPANEL_TRACKING
-    if (mixpanelTracking === 'true') {
+    if (this.props.mixpanelTracking) {
       mixpanel.track('banner_viewed')
     }
     const {

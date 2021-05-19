@@ -66,6 +66,7 @@ interface ContainerProps {
   cancelDialogContent: React.ReactNode
   workspaceAddedNewDestinations?: boolean
   defaultDestinationBehavior?: DefaultDestinationBehavior
+  mixpanelTracking?: boolean
 }
 
 function normalizeDestinations(destinations: Destination[]) {
@@ -172,10 +173,8 @@ const Container: React.FC<ContainerProps> = props => {
     return toggleBanner(false)
   }
 
-  const mixpanelTracking = process.env.MIXPANEL_TRACKING
-
   const onAccept = () => {
-    if (mixpanelTracking === 'true') {
+    if (props.mixpanelTracking) {
       mixpanel.track('banner_accept_clicked')
     }
     const truePreferences = Object.keys(props.preferences).reduce((acc, category) => {
@@ -196,7 +195,7 @@ const Container: React.FC<ContainerProps> = props => {
   }
 
   const onChangePreferences = () => {
-    if (mixpanelTracking === 'true') {
+    if (props.mixpanelTracking) {
       mixpanel.track('banner_settings_clicked')
     }
     toggleDialog(true)
@@ -209,7 +208,7 @@ const Container: React.FC<ContainerProps> = props => {
   }
 
   const handleSave = () => {
-    if (mixpanelTracking === 'true') {
+    if (props.mixpanelTracking) {
       mixpanel.track('banner_settings_saved_clicked')
     }
     toggleDialog(false)
