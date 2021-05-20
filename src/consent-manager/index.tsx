@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import mixpanel from 'mixpanel-browser'
 import ConsentManagerBuilder from '../consent-manager-builder'
 import Container from './container'
 import { ADVERTISING_CATEGORIES, FUNCTIONAL_CATEGORIES } from './categories'
@@ -49,8 +50,12 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
       customCategories,
       defaultDestinationBehavior,
       cdnHost,
-      onError
+      onError,
+      mixpanelToken,
+      mixpanelTracking
     } = this.props
+
+    mixpanel.init(mixpanelToken)
 
     return (
       <ConsentManagerBuilder
@@ -64,6 +69,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
         customCategories={customCategories}
         defaultDestinationBehavior={defaultDestinationBehavior}
         cdnHost={cdnHost}
+        mixpanelTracking={mixpanelTracking}
       >
         {({
           destinations,
@@ -106,6 +112,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
               havePreferencesChanged={havePreferencesChanged}
               defaultDestinationBehavior={defaultDestinationBehavior}
               workspaceAddedNewDestinations={workspaceAddedNewDestinations}
+              mixpanelTracking={mixpanelTracking}
             />
           )
         }}

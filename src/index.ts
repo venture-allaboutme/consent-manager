@@ -15,9 +15,6 @@ type Nav = Navigator & {
   msDoNotTrack?: Navigator['doNotTrack']
 }
 
-import mixpanel from 'mixpanel-browser'
-mixpanel.init(process.env.MIXPANEL_PROJECT_TOKEN)
-
 export function doNotTrack(): boolean | null {
   if (typeof window !== 'undefined' && (window.navigator || navigator)) {
     const nav = navigator as Nav
