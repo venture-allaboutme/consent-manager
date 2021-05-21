@@ -54,6 +54,7 @@ interface ContainerProps {
   havePreferencesChanged: boolean
   isConsentRequired: boolean
   implyConsentOnInteraction: boolean
+  bannerHeading?: React.ReactNode
   bannerContent: React.ReactNode
   bannerAcceptContent: React.ReactNode
   bannerRejectContent: React.ReactNode
@@ -247,6 +248,7 @@ const Container: React.FC<ContainerProps> = props => {
             onAccept={onAccept}
             onReject={onReject}
             onChangePreferences={onChangePreferences}
+            heading={props.bannerHeading}
             content={props.bannerContent}
             acceptContent={props.bannerAcceptContent}
             rejectContent={props.bannerRejectContent}

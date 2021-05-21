@@ -37,6 +37,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
       shouldRequireConsent,
       implyConsentOnInteraction,
       cookieDomain,
+      bannerHeading,
       bannerContent,
       bannerAcceptContent,
       bannerRejectContent,
@@ -97,6 +98,7 @@ export default class ConsentManager extends PureComponent<ConsentManagerProps, {
               implyConsentOnInteraction={
                 implyConsentOnInteraction ?? ConsentManager.defaultProps.implyConsentOnInteraction
               }
+              bannerHeading={bannerHeading}
               bannerContent={bannerContent}
               bannerAcceptContent={bannerAcceptContent}
               bannerRejectContent={bannerRejectContent}
