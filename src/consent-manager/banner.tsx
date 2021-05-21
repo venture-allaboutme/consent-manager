@@ -31,6 +31,7 @@ const Content = styled('div')`
   display: flex;
   flex-direction: column;
   text-align: left;
+  font-size: 1.2em;
 
   a {
     display: inline;
@@ -75,6 +76,16 @@ const SecondaryActions = styled('div')`
   @media only screen and (min-width: 768px) {
     margin-top: 0;
     align-items: center;
+  }
+`
+
+const BannerHeading = styled('div')`
+  text-align: center;
+  margin: 0;
+  font-size: 2em;
+  font-weight: bold;
+  &:not(:last-child) {
+    margin-bottom: 6px;
   }
 `
 
@@ -137,6 +148,7 @@ interface Props {
   onAccept: () => void
   onReject: () => void
   onChangePreferences: () => void
+  heading?: React.ReactNode
   content: React.ReactNode
   acceptContent: React.ReactNode
   rejectContent?: React.ReactNode
@@ -157,6 +169,7 @@ export default class Banner extends PureComponent<Props> {
       onAccept,
       onReject,
       onChangePreferences,
+      heading,
       content,
       acceptContent,
       rejectContent,
@@ -167,6 +180,7 @@ export default class Banner extends PureComponent<Props> {
 
     return (
       <Root innerRef={innerRef} backgroundColor={backgroundColor} textColor={textColor}>
+        {heading && <BannerHeading>{heading}</BannerHeading>}
         <Content>
           <BannerContent>{content}</BannerContent>
 
